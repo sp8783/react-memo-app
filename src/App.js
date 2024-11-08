@@ -17,6 +17,21 @@ function App() {
   const lastMemoId = memos[memos.length - 1]?.id;
   const activeMemo = memos.find((memo) => memo.id === activeMemoId);
 
+  function handleAddMemo(newMemo) {
+    setMemos((prevMemos) => [
+      ...prevMemos,
+      { ...newMemo, id: prevMemos.length + 1 },
+    ]);
+    setMode("view");
+  }
+
+  function handleEditMemo(editedMemo) {
+    setMemos((prevMemos) =>
+      prevMemos.map((memo) => (memo.id === activeMemoId ? editedMemo : memo))
+    );
+    setMode("view");
+  }
+
   function handleDeleteMemo(id) {
     setMemos((prevMemos) => prevMemos.filter((memo) => memo.id !== id));
     setActiveMemoId(null);
@@ -45,15 +60,15 @@ function App() {
         {mode === "add" && (
           <AddForm
             lastMemoId={lastMemoId}
-            setMemos={setMemos}
-            setMode={setMode}
+            onAddMemo={handleAddMemo}
+            onCancel={() => setMode("view")}
           />
         )}
         {mode === "edit" && (
           <EditForm
             activeMemo={activeMemo}
-            setMemos={setMemos}
-            setMode={setMode}
+            onEditMemo={handleEditMemo}
+            onCancel={() => setMode("view")}
           />
         )}
       </div>

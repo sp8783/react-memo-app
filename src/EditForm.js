@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function EditForm({ activeMemo, setMemos, setMode }) {
+export default function EditForm({ activeMemo, onEditMemo, onCancel }) {
   const [editedMemo, setEditedMemo] = useState(activeMemo);
 
   function handleTitleChange(e) {
@@ -13,10 +13,7 @@ export default function EditForm({ activeMemo, setMemos, setMode }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setMemos((prevMemos) =>
-      prevMemos.map((memo) => (memo.id === activeMemo.id ? editedMemo : memo))
-    );
-    setMode("view");
+    onEditMemo(editedMemo);
   }
 
   return (
@@ -32,7 +29,7 @@ export default function EditForm({ activeMemo, setMemos, setMode }) {
         placeholder="Content"
       />
       <button type="submit">Edit</button>
-      <button type="button" onClick={() => setMode("view")}>
+      <button type="button" onClick={onCancel}>
         Cancel
       </button>
     </form>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AddForm({ lastMemoId, setMemos, setMode }) {
+export default function AddForm({ lastMemoId, onAddMemo, onCancel }) {
   const [newMemo, setNewMemo] = useState({
     id: lastMemoId + 1,
     title: "",
@@ -17,11 +17,7 @@ export default function AddForm({ lastMemoId, setMemos, setMode }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setMemos((prevMemos) => [
-      ...prevMemos,
-      { ...newMemo, id: prevMemos.length + 1 },
-    ]);
-    setMode("view");
+    onAddMemo(newMemo);
   }
 
   return (
@@ -37,7 +33,7 @@ export default function AddForm({ lastMemoId, setMemos, setMode }) {
         placeholder="Content"
       />
       <button type="submit">Add</button>
-      <button type="button" onClick={() => setMode("view")}>
+      <button type="button" onClick={onCancel}>
         Cancel
       </button>
     </form>
