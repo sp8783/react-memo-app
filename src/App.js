@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MemoList from "./MemoList.js";
-import AddMemo from "./AddMemo.js";
-import EditMemo from "./EditMemo.js";
+import AddForm from "./AddForm.js";
+import EditForm from "./EditForm.js";
 import MemoDetail from "./MemoDetail.js";
 import "./App.css";
 
@@ -43,14 +43,14 @@ function App() {
           />
         )}
         {mode === "add" && (
-          <AddMemo
+          <AddForm
             lastMemoId={lastMemoId}
             setMemos={setMemos}
             setMode={setMode}
           />
         )}
         {mode === "edit" && (
-          <EditMemo
+          <EditForm
             activeMemo={activeMemo}
             setMemos={setMemos}
             setMode={setMode}

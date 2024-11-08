@@ -1,37 +1,42 @@
 import { useState } from "react";
 
-export default function EditMemo({ activeMemo, setMemos, setMode }) {
-  const [editedMemo, setEditedMemo] = useState(activeMemo);
+export default function AddForm({ lastMemoId, setMemos, setMode }) {
+  const [newMemo, setNewMemo] = useState({
+    id: lastMemoId + 1,
+    title: "",
+    content: "",
+  });
 
   function handleTitleChange(e) {
-    setEditedMemo({ ...editedMemo, title: e.target.value });
+    setNewMemo({ ...newMemo, title: e.target.value });
   }
 
   function handleContentChange(e) {
-    setEditedMemo({ ...editedMemo, content: e.target.value });
+    setNewMemo({ ...newMemo, content: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    setMemos((prevMemos) =>
-      prevMemos.map((memo) => (memo.id === activeMemo.id ? editedMemo : memo))
-    );
+    setMemos((prevMemos) => [
+      ...prevMemos,
+      { ...newMemo, id: prevMemos.length + 1 },
+    ]);
     setMode("view");
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        value={editedMemo.title}
+        value={newMemo.title}
         onChange={handleTitleChange}
         placeholder="Title"
       />
       <textarea
-        value={editedMemo.content}
+        value={newMemo.content}
         onChange={handleContentChange}
         placeholder="Content"
       />
-      <button type="submit">Edit</button>
+      <button type="submit">Add</button>
       <button type="button" onClick={() => setMode("view")}>
         Cancel
       </button>
