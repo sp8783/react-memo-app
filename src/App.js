@@ -2,6 +2,7 @@ import { useState } from "react";
 import MemoList from "./MemoList.js";
 import AddMemo from "./AddMemo.js";
 import EditMemo from "./EditMemo.js";
+import MemoDetail from "./MemoDetail.js";
 import "./App.css";
 
 function App() {
@@ -35,14 +36,11 @@ function App() {
       </div>
       <div className="App-main">
         {mode === "view" && activeMemo && (
-          <div>
-            <h1>{activeMemo?.title}</h1>
-            <p>{activeMemo?.content}</p>
-            <button onClick={() => setMode("edit")}>Edit</button>
-            <button onClick={() => handleDeleteMemo(activeMemoId)}>
-              Delete
-            </button>
-          </div>
+          <MemoDetail
+            activeMemo={activeMemo}
+            onEdit={() => setMode("edit")}
+            onDelete={() => handleDeleteMemo(activeMemoId)}
+          />
         )}
         {mode === "add" && (
           <AddMemo
