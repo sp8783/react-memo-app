@@ -24,10 +24,12 @@ export default function AddForm({ lastMemoId, onAddMemo, onCancel }) {
         onChange={handleContentChange}
         placeholder="Content"
       />
-      <button type="submit">Add</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
+      <div>
+        <button type="submit">Add</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

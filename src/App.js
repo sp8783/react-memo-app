@@ -51,7 +51,9 @@ function App() {
     <div className="App">
       <div className="App-header">
         <MemoList memos={memos} onSelectMemo={handleSelectMemo} />
-        <button onClick={() => setMode("add")}>+</button>
+        <button className="plus" onClick={() => setMode("add")}>
+          +
+        </button>
       </div>
       <div className="App-main">
         {mode === "view" && activeMemo && (

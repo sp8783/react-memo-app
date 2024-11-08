@@ -21,10 +21,12 @@ export default function EditForm({ activeMemo, onEditMemo, onCancel }) {
         onChange={handleContentChange}
         placeholder="Content"
       />
-      <button type="submit">Edit</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
+      <div>
+        <button type="submit">Edit</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }
