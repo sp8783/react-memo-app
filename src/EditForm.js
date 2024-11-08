@@ -1,15 +1,8 @@
-import { useState } from "react";
+import useMemoInput from "./useMemoInput.js";
 
 export default function EditForm({ activeMemo, onEditMemo, onCancel }) {
-  const [editedMemo, setEditedMemo] = useState(activeMemo);
-
-  function handleTitleChange(e) {
-    setEditedMemo({ ...editedMemo, title: e.target.value });
-  }
-
-  function handleContentChange(e) {
-    setEditedMemo({ ...editedMemo, content: e.target.value });
-  }
+  const [editedMemo, handleTitleChange, handleContentChange] =
+    useMemoInput(activeMemo);
 
   function handleSubmit(e) {
     e.preventDefault();
