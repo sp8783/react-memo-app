@@ -31,7 +31,7 @@ function App() {
 
   function handleEditMemo(editedMemo) {
     setMemos((prevMemos) =>
-      prevMemos.map((memo) => (memo.id === activeMemoId ? editedMemo : memo))
+      prevMemos.map((memo) => (memo.id === activeMemoId ? editedMemo : memo)),
     );
     setMode("view");
   }
