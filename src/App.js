@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MemoList from "./MemoList.js";
 import AddForm from "./AddForm.js";
 import EditForm from "./EditForm.js";
@@ -6,16 +6,20 @@ import MemoDetail from "./MemoDetail.js";
 import "./App.css";
 
 function App() {
-  const initialMemos = [
-    { id: 1, title: "test1", content: "Hello!!" },
-    { id: 2, title: "test2", content: "lol" },
-  ];
-
-  const [memos, setMemos] = useState(initialMemos);
+  const [memos, setMemos] = useState([]);
   const [activeMemoId, setActiveMemoId] = useState(null);
   const [mode, setMode] = useState("view");
   const lastMemoId = memos[memos.length - 1]?.id;
   const activeMemo = memos.find((memo) => memo.id === activeMemoId);
+
+  useEffect(() => {
+    const savedMemos = localStorage.getItem("memos");
+    setMemos(savedMemos ? JSON.parse(savedMemos) : []);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("memos", JSON.stringify(memos));
+  }, [memos]);
 
   function handleAddMemo(newMemo) {
     setMemos((prevMemos) => [
