@@ -1,4 +1,4 @@
-import useMemoInput from "./useMemoInput.js";
+import useMemoInput from "./hooks/useMemoInput.js";
 
 export default function AddForm({ lastMemoId, onAddMemo, onCancel }) {
   const [newMemo, handleTitleChange, handleContentChange] = useMemoInput({

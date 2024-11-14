@@ -1,4 +1,4 @@
-import useMemoInput from "./useMemoInput.js";
+import useMemoInput from "./hooks/useMemoInput.js";
 
 export default function EditForm({ activeMemo, onEditMemo, onCancel }) {
   const [editedMemo, handleTitleChange, handleContentChange] =
