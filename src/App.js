@@ -23,7 +23,7 @@ function App() {
 
   function handleAddMemo(newMemo) {
     setMemos((prevMemos) => {
-      const newMemos = [...prevMemos, { ...newMemo, id: prevMemos.length + 1 }];
+      const newMemos = [...prevMemos, { ...newMemo, id: crypto.randomUUID() }];
       updateLocalStorage(newMemos);
       return newMemos;
     });
