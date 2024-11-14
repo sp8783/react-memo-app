@@ -17,27 +17,36 @@ function App() {
     setMemos(savedMemos ? JSON.parse(savedMemos) : []);
   }, []);
 
-  useEffect(() => {
+  function updateLocalStorage(memos) {
     localStorage.setItem("memos", JSON.stringify(memos));
-  }, [memos]);
+  }
 
   function handleAddMemo(newMemo) {
-    setMemos((prevMemos) => [
-      ...prevMemos,
-      { ...newMemo, id: prevMemos.length + 1 },
-    ]);
+    setMemos((prevMemos) => {
+      const newMemos = [...prevMemos, { ...newMemo, id: prevMemos.length + 1 }];
+      updateLocalStorage(newMemos);
+      return newMemos;
+    });
     setMode("view");
   }
 
   function handleEditMemo(editedMemo) {
-    setMemos((prevMemos) =>
-      prevMemos.map((memo) => (memo.id === activeMemoId ? editedMemo : memo)),
-    );
+    setMemos((prevMemos) => {
+      const newMemos = prevMemos.map((memo) =>
+        memo.id === editedMemo.id ? editedMemo : memo
+      );
+      updateLocalStorage(newMemos);
+      return newMemos;
+    });
     setMode("view");
   }
 
   function handleDeleteMemo(id) {
-    setMemos((prevMemos) => prevMemos.filter((memo) => memo.id !== id));
+    setMemos((prevMemos) => {
+      const newMemos = prevMemos.filter((memo) => memo.id !== id);
+      updateLocalStorage(newMemos);
+      return newMemos;
+    });
     setActiveMemoId(null);
     setMode("view");
   }
