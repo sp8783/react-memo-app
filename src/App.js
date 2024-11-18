@@ -61,11 +61,15 @@ function App() {
   return (
     <div className="App">
       <LoggedInProvider value={{ isLoggedIn, setIsLoggedIn }}>
-        <LoggedInHeader />
-        <div className="App-header">
-          <MemoList memos={memos} onSelectMemo={handleSelectMemo} />
-          {isLoggedIn && <button onClick={() => setMode("add")}>+</button>}
-        </div>
+        <header className="App-header">
+          <div className="login-section">
+            <LoggedInHeader />
+          </div>
+          <div className="memolist-section">
+            <MemoList memos={memos} onSelectMemo={handleSelectMemo} />
+            {isLoggedIn && <button onClick={() => setMode("add")}>+</button>}
+          </div>
+        </header>
         <div className="App-main">
           {mode === "view" && activeMemo && (
             <MemoDetail

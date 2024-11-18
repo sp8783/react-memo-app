@@ -8,11 +8,11 @@ export default function LoggedInHeader() {
   }
 
   return (
-    <header>
-      {isLoggedIn ? <h1>Welcome :)</h1> : <h1>Please log in</h1>}
+    <div>
+      {isLoggedIn ? <p>Welcome :)</p> : <p>Please log in</p>}
       <button onClick={handleLoginStatus}>
         {isLoggedIn ? "Logout" : "Login"}
       </button>
-    </header>
+    </div>
   );
 }
