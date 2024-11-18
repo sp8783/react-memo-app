@@ -35,7 +35,7 @@ function App() {
   function handleEditMemo(editedMemo) {
     setMemos((prevMemos) => {
       const newMemos = prevMemos.map((memo) =>
-        memo.id === editedMemo.id ? editedMemo : memo
+        memo.id === editedMemo.id ? editedMemo : memo,
       );
       updateLocalStorage(newMemos);
       return newMemos;
