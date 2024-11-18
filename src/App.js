@@ -9,7 +9,6 @@ function App() {
   const [memos, setMemos] = useState([]);
   const [activeMemoId, setActiveMemoId] = useState(null);
   const [mode, setMode] = useState("view");
-  const lastMemoId = memos[memos.length - 1]?.id;
   const activeMemo = memos.find((memo) => memo.id === activeMemoId);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function App() {
   function handleEditMemo(editedMemo) {
     setMemos((prevMemos) => {
       const newMemos = prevMemos.map((memo) =>
-        memo.id === editedMemo.id ? editedMemo : memo
+        memo.id === editedMemo.id ? editedMemo : memo,
       );
       updateLocalStorage(newMemos);
       return newMemos;
@@ -73,11 +72,7 @@ function App() {
           />
         )}
         {mode === "add" && (
-          <AddForm
-            lastMemoId={lastMemoId}
-            onAddMemo={handleAddMemo}
-            onCancel={() => setMode("view")}
-          />
+          <AddForm onAddMemo={handleAddMemo} onCancel={() => setMode("view")} />
         )}
         {mode === "edit" && (
           <EditForm
