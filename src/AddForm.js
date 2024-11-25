@@ -1,6 +1,6 @@
 import useMemoInput from "./hooks/useMemoInput.js";
 
-export default function AddForm({ lastMemoId, onAddMemo, onCancel }) {
+export default function AddForm({ onAddMemo, onCancel }) {
   const [newMemo, handleTitleChange, handleContentChange] = useMemoInput({
     id: crypto.randomUUID(),
     title: "",

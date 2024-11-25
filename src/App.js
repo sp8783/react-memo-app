@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useLoggedIn } from "./hooks/useLoggedIn.js";
+import AuthButton from "./AuthButton.js";
 import MemoList from "./MemoList.js";
 import AddForm from "./AddForm.js";
 import EditForm from "./EditForm.js";
@@ -6,10 +8,10 @@ import MemoDetail from "./MemoDetail.js";
 import "./App.css";
 
 function App() {
+  const { isLoggedIn } = useLoggedIn();
   const [memos, setMemos] = useState([]);
   const [activeMemoId, setActiveMemoId] = useState(null);
   const [mode, setMode] = useState("view");
-  const lastMemoId = memos[memos.length - 1]?.id;
   const activeMemo = memos.find((memo) => memo.id === activeMemoId);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ function App() {
   function handleEditMemo(editedMemo) {
     setMemos((prevMemos) => {
       const newMemos = prevMemos.map((memo) =>
-        memo.id === editedMemo.id ? editedMemo : memo
+        memo.id === editedMemo.id ? editedMemo : memo,
       );
       updateLocalStorage(newMemos);
       return newMemos;
@@ -58,12 +60,15 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-header">
-        <MemoList memos={memos} onSelectMemo={handleSelectMemo} />
-        <button className="plus" onClick={() => setMode("add")}>
-          +
-        </button>
-      </div>
+      <header className="App-header">
+        <div className="login-section">
+          <AuthButton />
+        </div>
+        <div className="memolist-section">
+          <MemoList memos={memos} onSelectMemo={handleSelectMemo} />
+          {isLoggedIn && <button onClick={() => setMode("add")}>+</button>}
+        </div>
+      </header>
       <div className="App-main">
         {mode === "view" && activeMemo && (
           <MemoDetail
@@ -72,14 +77,13 @@ function App() {
             onDelete={() => handleDeleteMemo(activeMemoId)}
           />
         )}
-        {mode === "add" && (
+        {mode === "add" && isLoggedIn && (
           <AddForm
-            lastMemoId={lastMemoId}
             onAddMemo={handleAddMemo}
             onCancel={() => setMode("view")}
           />
         )}
-        {mode === "edit" && (
+        {mode === "edit" && isLoggedIn && (
           <EditForm
             activeMemo={activeMemo}
             onEditMemo={handleEditMemo}
