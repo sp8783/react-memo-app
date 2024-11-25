@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LoggedInProvider } from "./hooks/useLoggedIn.js";
-import AuthStatus from "./AuthStatus.js";
+import AuthButton from "./AuthButton.js";
 import MemoList from "./MemoList.js";
 import AddForm from "./AddForm.js";
 import EditForm from "./EditForm.js";
@@ -63,7 +63,7 @@ function App() {
       <LoggedInProvider value={{ isLoggedIn, setIsLoggedIn }}>
         <header className="App-header">
           <div className="login-section">
-            <AuthStatus />
+            <AuthButton />
           </div>
           <div className="memolist-section">
             <MemoList memos={memos} onSelectMemo={handleSelectMemo} />

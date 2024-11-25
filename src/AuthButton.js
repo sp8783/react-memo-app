@@ -1,6 +1,6 @@
 import { useLoggedIn } from "./hooks/useLoggedIn";
 
-export default function AuthStatus() {
+export default function AuthButton() {
   const { isLoggedIn, setIsLoggedIn } = useLoggedIn();
 
   function handleLoginStatus() {
