@@ -1,12 +1,17 @@
-import { useContext, createContext } from "react";
+import { useState, useContext, createContext } from "react";
 
 const LoggedInContext = createContext();
 
 export const useLoggedIn = () => useContext(LoggedInContext);
 
-export function LoggedInProvider({ value, children }) {
+export function LoggedInProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const login = () => setIsLoggedIn(true);
+  const logout = () => setIsLoggedIn(false);
+
   return (
-    <LoggedInContext.Provider value={value}>
+    <LoggedInContext.Provider value={{ isLoggedIn, login, logout }}>
       {children}
     </LoggedInContext.Provider>
   );
